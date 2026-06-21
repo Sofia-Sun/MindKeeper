@@ -12,22 +12,68 @@
         .accent { color: #1a365d; }
         .accent-bg { background-color: #1a365d; }
         .border-accent { border-color: #1a365d; }
-        .figure-placeholder {
+        .figure-container {
             background-color: #f8fafc;
-            border: 2px dashed #cbd5e1;
             border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.9rem;
-            min-height: 250px;
+            padding: 16px;
             width: 100%;
         }
-        .figure-placeholder svg { margin-bottom: 8px; }
+        .figure-container img, .figure-container video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .figure-container video {
+            background: #000;
+        }
         .badge { background: #e2e8f0; color: #1e293b; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .fig-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #475569;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        .fig-sub {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+        .footer-info {
+            border-top: 2px solid #e2e8f0;
+            padding-top: 24px;
+            margin-top: 24px;
+        }
+        .footer-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            text-align: left;
+            font-size: 0.875rem;
+            color: #475569;
+        }
+        .footer-info-grid .label {
+            font-weight: 600;
+            color: #1e293b;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 antialiased">
@@ -39,6 +85,7 @@
         <div class="space-x-6 text-sm font-medium hidden md:block">
             <a href="#abstract" class="hover:accent">Abstract</a>
             <a href="#system" class="hover:accent">System</a>
+            <a href="#demo" class="hover:accent">Demo</a>
             <a href="#results" class="hover:accent">Results</a>
             <a href="#implications" class="hover:accent">Implications</a>
             <a href="#citation" class="hover:accent">Citation</a>
@@ -48,7 +95,7 @@
 
 <!-- Hero Section -->
 <header class="pt-32 pb-16 px-4 text-center max-w-4xl mx-auto">
-    <p class="text-sm font-semibold uppercase tracking-wider text-blue-600 mb-4">CHI '26 · Yokohama, Japan</p>
+    <p class="text-sm font-semibold uppercase tracking-wider text-blue-600 mb-4">AP0011 – Human-Computer Interaction</p>
     <h1 class="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-gray-900">
         MindKeeper
     </h1>
@@ -111,13 +158,11 @@
             </ul>
             <p class="text-gray-600 text-sm mt-6 italic">Users must build a mental model of the conversation structure — a cognitively demanding task.</p>
         </div>
-        <div class="figure-placeholder p-6">
-            <!-- Placeholder for Chat Screenshot -->
-            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-            <span class="block mt-2 font-medium">Figure 1: LLM Chat Interface</span>
-            <span class="text-xs text-gray-500">(Placeholder: insert figures/chat.png)</span>
+        <!-- FIGURE 1: Control (without map) -->
+        <div class="figure-container">
+            <img src="figures/without.png" alt="Figure 1: Control Condition - Chat Only" />
+            <p class="fig-caption">Figure 1: Control Condition — Chat Only</p>
+            <p class="fig-sub">Linear chat without graphical augmentation</p>
         </div>
     </div>
 </section>
@@ -136,14 +181,30 @@
             </ul>
             <p class="text-sm text-gray-600 mt-4 italic">Design Principle: Augmentation, not replacement.</p>
         </div>
-        <div class="figure-placeholder p-6">
-            <!-- Placeholder for Interface Screenshot -->
-            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
-            </svg>
-            <span class="block mt-2 font-medium">Figure 2: MindKeeper Interface</span>
-            <span class="text-xs text-gray-500">(Placeholder: insert figures/with.png)</span>
+        <!-- FIGURE 2: Treatment (with map) -->
+        <div class="figure-container">
+            <img src="figures/with.png" alt="Figure 2: Treatment Condition - Chat + Map" />
+            <p class="fig-caption">Figure 2: Treatment Condition — Chat + Graphical Map</p>
+            <p class="fig-sub">Real-time graphical logic map augmenting the chat interface</p>
         </div>
+    </div>
+</section>
+
+<!-- Demo Video -->
+<section id="demo" class="max-w-4xl mx-auto px-4 py-16 border-t border-gray-200">
+    <h2 class="text-2xl font-bold mb-6 text-center accent">Live Demo</h2>
+    <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+        Watch MindKeeper in action — the graphical map updates in real-time as the conversation progresses.
+    </p>
+    <div class="figure-container">
+        <div class="video-container">
+            <video controls playsinline preload="metadata">
+                <source src="figures/demo.mov" type="video/quicktime">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <p class="fig-caption">Video 1: MindKeeper in Action</p>
+        <p class="fig-sub">Real-time graphical map generation during an LLM learning conversation</p>
     </div>
 </section>
 
@@ -173,23 +234,17 @@
 
     <!-- Row 2: Figures Side by Side -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Box Plot Placeholder -->
-        <div class="figure-placeholder p-6 h-64">
-            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3m0 0l3 3m-3-3v12M4 8h16M4 16h16" />
-            </svg>
-            <span class="block mt-2 font-medium">Figure 3: Box Plot</span>
-            <span class="text-xs text-gray-500">Control (narrow) vs Treatment (wide spread)</span>
-            <span class="text-xs text-gray-500">(Placeholder: insert figures/box.png)</span>
+        <!-- FIGURE 3: Box Plot -->
+        <div class="figure-container">
+            <img src="figures/box.png" alt="Figure 3: Box Plot" />
+            <p class="fig-caption">Figure 3: Box Plot</p>
+            <p class="fig-sub">Control (narrow) vs Treatment (wide spread)</p>
         </div>
-        <!-- Bar Chart Placeholder -->
-        <div class="figure-placeholder p-6 h-64">
-            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            <span class="block mt-2 font-medium">Figure 4: Individual Differences</span>
-            <span class="text-xs text-gray-500">Beneficiaries (Green) vs Detrimental (Red)</span>
-            <span class="text-xs text-gray-500">(Placeholder: insert figures/bar.png)</span>
+        <!-- FIGURE 4: Bar Chart -->
+        <div class="figure-container">
+            <img src="figures/bar.png" alt="Figure 4: Individual Differences" />
+            <p class="fig-caption">Figure 4: Individual Differences</p>
+            <p class="fig-sub">Beneficiaries (Green) vs Detrimental (Red)</p>
         </div>
     </div>
 </section>
@@ -247,10 +302,42 @@
     </div>
 </section>
 
-<!-- Footer -->
+<!-- Footer with Student Information -->
 <footer class="border-t border-gray-200 py-8 text-center text-sm text-gray-500">
-    <p>© 2026 Yu Sun · Shenzhen Loop Area Institute (SLAI)</p>
-    <p class="mt-1">Built for CHI '26 · Yokohama</p>
+    <div class="max-w-4xl mx-auto px-4">
+        <!-- Student Information Grid -->
+        <div class="footer-info-grid mb-6">
+            <div>
+                <span class="label">Name:</span> Yu Sun
+            </div>
+            <div>
+                <span class="label">Student ID:</span> 525232
+            </div>
+            <div>
+                <span class="label">Email:</span> 
+                <a href="mailto:sofia.sun@berkeley.edu" class="text-blue-600 hover:underline">sofia.sun@berkeley.edu</a>
+            </div>
+            <div>
+                <span class="label">University:</span> Shenzhen Loop Area Institute (SLAI)
+            </div>
+            <div>
+                <span class="label">Course:</span> AP0011 – Human-Computer Interaction
+            </div>
+            <div>
+                <span class="label">Instructor:</span> Sahba Zojaji
+            </div>
+            <div>
+                <span class="label">Submission Date:</span> June 23, 2026
+            </div>
+        </div>
+        
+        <!-- Divider -->
+        <div class="border-t border-gray-200 pt-4 mt-2">
+            <p>© 2026 Yu Sun · Shenzhen Loop Area Institute (SLAI)</p>
+            <p class="mt-1">Built for CHI '26 · Yokohama</p>
+            <p class="mt-2 text-xs text-gray-400">Course Project: AP0011 – Human-Computer Interaction</p>
+        </div>
+    </div>
 </footer>
 
 </body>
